@@ -1,0 +1,41 @@
+{% extends 'base.html'%}
+{% block title %}Blog{% endblock title %}
+{% block activeblog %}active{% endblock activeblog%}
+{% block css %}
+<style>
+    .container {
+        min-height: 100vh;
+    }
+</style>
+{% endblock css %}
+{% block body %}
+<div class="container mb-0 pb-0">
+    <h1 class="text-center mt-3 my-3">Welcome to <strong><em>Dream Bloggers</em> </strong></h1>
+
+    {% for blog in blogs %}
+    <div class=" my-2 py-2 mx-3 px-3 ">
+        {% comment %} <img src="..." class="mr-3" alt="..."> {% endcomment %}
+
+        <h3 class="text-dark "><a href="/blogpost/{{blog.slug}}" class="text-dark mt-2">{{blog.title}}</a></h3>
+        <div class="my-2 py-2">
+            {{blog.desc}}
+        </div>
+        <a href="/blogpost/{{blog.slug}}" class="text-dark">
+            <button type="button my-2 py-2" class="btn btn-outline-primary"> Read more...</button></a>
+    </div>
+    {% endfor %}
+    <div class="my-3">
+{% if prev %}
+<button type="button" class="btn btn-secondary btn-sm "><a class="text-light" href="/blog?page={{prev}}">&laquo; Previous</a></button>
+ {% else %}
+<button type="button" class="btn btn-secondary btn-sm "><a class="text-light" href="#">&laquo; Previous</a></button>
+{% endif %}
+{% if nxt %}
+<button type="button" class="btn btn-secondary btn-sm float-right "><a class="text-light" href="/blog?page={{nxt}}"> Next &raquo;</a></button>
+{% else %}
+<button type="button" class="btn btn-secondary btn-sm float-right "><a class="text-light" href="#"> Next &raquo;</a></button>
+{% endif %}
+    </div>
+</div>
+{% endblock body %}
+{% comment %} {% block positionfooter %} mx-0 my-0 px-0 {% endblock positionfooter %} {% endcomment %}
